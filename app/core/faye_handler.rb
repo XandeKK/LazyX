@@ -1,6 +1,6 @@
 class FayeHandler
 	def initialize
-		@faye_client = Faye::Client.new('http://localhost:9292/faye')
+		@faye_client = Faye::Client.new('http://localhost:4789/faye')
 	end
 
 	def incoming(message, callback)
