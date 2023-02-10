@@ -33,6 +33,6 @@ class App < Sinatra::Base
   end
 
 	get '/' do
-		erb 'opa', :layout => :application
+		erb :'home/index', :layout => :application
 	end
 end

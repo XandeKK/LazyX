@@ -1,0 +1,24 @@
+<header class="fixed bottom-0 z-50 w-screen">
+  <nav class="bg-slate-600 h-8 w-full">
+    <div class="flex justify-between items-center h-full pr-2 text-gray-200 font-mono font-bold">
+      <button id="button-windows-list" class="flex items-center w-36 h-full border-r border-gray-400 pl-1" data-dropdown-toggle="dropdown-window" data-dropdown-offset-distance="0">
+        <p id="current-window" class="truncate text-ellipsis"></p>
+      </button>
+      <div class="flex gap-3">
+        <button id="volume" data-dropdown-toggle="dropdown-volume">
+          <svg id="volume-up" class="hidden w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M5.889 16H2a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h3.889l5.294-4.332a.5.5 0 0 1 .817.387v15.89a.5.5 0 0 1-.817.387L5.89 16zm13.517 4.134l-1.416-1.416A8.978 8.978 0 0 0 21 12a8.982 8.982 0 0 0-3.304-6.968l1.42-1.42A10.976 10.976 0 0 1 23 12c0 3.223-1.386 6.122-3.594 8.134zm-3.543-3.543l-1.422-1.422A3.993 3.993 0 0 0 16 12c0-1.43-.75-2.685-1.88-3.392l1.439-1.439A5.991 5.991 0 0 1 18 12c0 1.842-.83 3.49-2.137 4.591z"/></svg>
+
+          <svg id="volume-down" class="hidden w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M8.889 16H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h3.889l5.294-4.332a.5.5 0 0 1 .817.387v15.89a.5.5 0 0 1-.817.387L8.89 16zm9.974.591l-1.422-1.422A3.993 3.993 0 0 0 19 12c0-1.43-.75-2.685-1.88-3.392l1.439-1.439A5.991 5.991 0 0 1 21 12c0 1.842-.83 3.49-2.137 4.591z"/></svg>
+
+          <svg id="volume-muted" class="hidden w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M5.889 16H2a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h3.889l5.294-4.332a.5.5 0 0 1 .817.387v15.89a.5.5 0 0 1-.817.387L5.89 16zm14.525-4l3.536 3.536-1.414 1.414L19 13.414l-3.536 3.536-1.414-1.414L17.586 12 14.05 8.464l1.414-1.414L19 10.586l3.536-3.536 1.414 1.414L20.414 12z"/></svg>
+
+          <svg id="volume-normal" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M 5.889 16 L 2 16 C 1.448 16 1 15.552 1 15 L 1 9 C 1 8.448 1.448 8 2 8 L 5.889 8 L 11.183 3.668 C 11.481 3.424 11.931 3.594 11.993 3.973 C 11.998 4 12 4.028 12 4.055 L 12 19.945 C 12 20.33 11.584 20.571 11.25 20.379 C 11.227 20.365 11.204 20.349 11.183 20.332 L 5.89 16 L 5.889 16 Z"></path>
+          </svg>
+        </button>
+        <div id="time">
+        </div>
+      </div>
+    </div>
+  </nav>
+  <%= erb :'partials/dropdowns'%>
+</header>
