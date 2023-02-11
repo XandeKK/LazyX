@@ -6,12 +6,6 @@ module MessageHandler
 		self.send(key, faye_client, message['data'])
 	end
 
-	def self.command_line(faye_client, message)
-		out, st = Open3.capture2(message['command_line'])
-		out = {command: out}
-		self.publish(faye_client, out)
-	end
-
 	def self.set_volume(_f, message)
 		Open3.capture2("pactl set-sink-volume @DEFAULT_SINK@ #{message['set_volume']}%")
 	end
