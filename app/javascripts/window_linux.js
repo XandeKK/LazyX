@@ -33,10 +33,10 @@ class WindowLinux {
 	}
 
 	static changeWindow(elem) {
-		client.send_message({change_window: elem});
+		client.send_message({window: { change: elem }});
 	}
 
 	static closeWindow(elem) {
-		client.send_message({close_window: elem});
+		client.send_message({window: { close: elem }});
 	}
 }

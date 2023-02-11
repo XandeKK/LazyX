@@ -3,29 +3,29 @@ require 'open3'
 module MessageHandler
 	def self.handler(faye_client, message)
 		key = message['data'].keys.first.to_sym
-		self.send(key, faye_client, message['data'])
+		begin
+			self.send(key, faye_client, message['data'])
+		rescue => e
+			puts e
+		end
 	end
 
 	def self.set_volume(_f, message)
 		Open3.capture2("pactl set-sink-volume @DEFAULT_SINK@ #{message['set_volume']}%")
 	end
 
-	def self.change_window(_f, message)
-		Open3.capture2("wmctrl -a '#{message['change_window']}'")
+	def self.window(_f, message)
+		Window.handler message['window']
 	end
 
-	def self.close_window(_f, message)
-		Open3.capture2("wmctrl -c '#{message['close_window']}'")
+	def self.file_manager(faye_client, message)
+		FileManager.handler(faye_client, message['file_manager'])
 	end
 
 	def self.linux_info(faye_client, message)
 		out = {
 			linux_info: {
-				window: {
-					current: Open3.capture2("xprop -id $(xprop -root _NET_ACTIVE_WINDOW | cut -d ' ' -f 5) WM_NAME | awk -F '\"' '{print $2}'")[0],
-					list: Open3.capture2('wmctrl -l | grep " [01] " | cut -c18-')[0].split("\n"),
-					windows: Open3.capture2('wmctrl -d')[0]
-				},
+				window: Window.get_info,
 				wifi: {
 					info: Open3.capture2('iwconfig wlp1s0')[0]
 				},

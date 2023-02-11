@@ -9,4 +9,8 @@ class MessageHandler {
 		WindowLinux.settingWindows(message['window']);
 		Audio.settingAudio(message['audio']);
 	}
+
+	static file_manager(message) {
+		FileManagerHandler.handler(message);
+	}
 }
