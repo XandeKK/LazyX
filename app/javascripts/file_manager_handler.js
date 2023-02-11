@@ -9,11 +9,11 @@ class FileManagerHandler {
 	}
 
 	static home(message) {
-		// todo
+		FileManager.addFiles(message);
 	}
 
 	static get_files(message) {
-		// todo
+		FileManager.addFiles(message);
 	}
 
 	static search(message) {

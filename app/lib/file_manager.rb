@@ -6,13 +6,40 @@ module FileManager
 		self.send(key, faye_client, message)
 	end
 
+	def self.glob(path)
+		dirs = {path: path, files: []}
+		files_list = []
+		files = Dir.glob("#{path}/*")
+
+		files.each do |file|
+			property = {
+				name: file,
+				dir: File.directory?(file),
+				path: path,
+				image: file.match?(/\.(jpg|jpeg|png|gif)$/),
+				video: file.match?(/\.(mkv|mp4|avi)$/),
+				executable: File.executable?(file),
+				compressed: file.match?(/\.(zip|rar|tar)$/)
+			}
+
+			if File.directory?(file)
+				dirs[:files].append property
+			else
+				files_list.append property
+			end
+		end
+
+		dirs[:files].concat files_list
+		dirs
+	end
+
 	def self.home(faye, message)
-		files = Dir.glob "#{Dir.home}/*"
+		files = self.glob(Dir.home)
 		self.publish(faye, {home: files})
 	end
 
 	def self.get_files(faye, message)
-		files = Dir.glob "#{message['get_files']}/*"
+		files = self.glob(message['get_files'])
 		self.publish(faye, {get_files: files})
 	end
 
