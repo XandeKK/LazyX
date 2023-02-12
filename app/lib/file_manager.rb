@@ -14,7 +14,8 @@ module FileManager
 		filenames.each do |file|
 			property = {
 				name: file,
-				path: path
+				path: path,
+				size: Open3.capture2("du -sh '#{file}'")[0].split("\t").first
 			}
 
 			if File.directory?(file)
