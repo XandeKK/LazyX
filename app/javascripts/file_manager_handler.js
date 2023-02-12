@@ -1,6 +1,6 @@
 class FileManagerHandler {
 	static initialize() {
-		FileManager.initializeEvent();
+		FileManager.initialize();
 		client.send_message({file_manager: { home: '' }})
 	}
 

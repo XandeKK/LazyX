@@ -7,29 +7,33 @@ module FileManager
 	end
 
 	def self.glob(path)
+		filenames = Dir.glob("#{path}/*")
 		dirs = {path: path, files: []}
-		files_list = []
-		files = Dir.glob("#{path}/*")
+		files = []
 
-		files.each do |file|
+		filenames.each do |file|
 			property = {
 				name: file,
-				dir: File.directory?(file),
-				path: path,
-				image: file.match?(/\.(jpg|jpeg|png|gif)$/),
-				video: file.match?(/\.(mkv|mp4|avi)$/),
-				compressed: file.match?(/\.(zip|rar|tar)$/)
+				path: path
 			}
 
 			if File.directory?(file)
-				dirs[:files].append property
+				property[:type] = 'dir'
+				dirs[:files].append(property)
+			elsif file.match?(/\.(jpg|jpeg|png|gif)$/)
+				property[:type] = 'image'
+				files.append(property)
+			elsif file.match?(/\.(mkv|mp4|avi)$/)
+				property[:type] = 'video'
+				files.append(property)
 			else
-				files_list.append property
+				property[:type] = 'unknow'
+				files.append(property)
 			end
 		end
 
-		dirs[:files].concat files_list
-		dirs
+		dirs[:files].concat files
+		return dirs
 	end
 
 	def self.home(faye, message)

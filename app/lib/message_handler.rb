@@ -6,7 +6,7 @@ module MessageHandler
 		begin
 			self.send(key, faye_client, message['data'])
 		rescue => e
-			puts e
+			self.publish({error: e})
 		end
 	end
 

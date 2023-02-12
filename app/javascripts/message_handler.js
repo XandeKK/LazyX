@@ -13,4 +13,8 @@ class MessageHandler {
 	static file_manager(message) {
 		FileManagerHandler.handler(message);
 	}
+
+	static error(message) {
+		console.log(message);
+	}
 }
