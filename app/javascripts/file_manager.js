@@ -9,7 +9,7 @@ class FileManager {
 		});
 		document.getElementById('input-folder').addEventListener('keypress', (event)=> {
 			if (event.key === "Enter") {
-				this.createFolver({target: document.getElementById('add-folder')});
+				this.createFolder({target: document.getElementById('add-folder')});
 			}
 		});
 

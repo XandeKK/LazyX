@@ -22,12 +22,20 @@ class FileManagerHandler {
 	}
 
 	static create_file(message) {
-		if(message['error']) return;
+		if(message['error']) {
+			Alert.add(message['error'], 'danger', 3000);
+			return;
+		}
+		Alert.add('success', 'success', 2000);
 		FileManager.addFiles(message['files']);
 	}
 
 	static create_folder(message) {
-		if(message['error']) return;
+		if(message['error']) {
+			Alert.add(message['error'], 'danger', 3000);
+			return;
+		}
+		Alert.add('success', 'success', 2000);
 		FileManager.addFiles(message['files']);
 	}
 
