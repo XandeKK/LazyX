@@ -1,7 +1,14 @@
 class FileManager {
 	static initialize() {
+		document.getElementById('open-on-pc').addEventListener('click', this.openOnPc);
+		document.getElementById('rename').addEventListener('click', this.rename);
+		document.getElementById('dropdown-rename').addEventListener('click', this.setRename);
+		document.getElementById('delete').addEventListener('click', this.delete);
+		document.getElementById('show-clipboard').addEventListener('click', this.showClipboard);
+		document.getElementById('move').addEventListener('click', this.move);
 		document.getElementById('add-file').addEventListener('click', this.createFile);
 		document.getElementById('add-folder').addEventListener('click', this.createFolder);
+
 		document.getElementById('input-file').addEventListener('keypress', (event)=> {
 			if (event.key === "Enter") {
 				this.createFile({target: document.getElementById('add-file')});
@@ -11,6 +18,9 @@ class FileManager {
 			if (event.key === "Enter") {
 				this.createFolder({target: document.getElementById('add-folder')});
 			}
+		});
+		document.getElementById('input-rename').addEventListener('keypress', (event)=> {
+			if (event.key === "Enter") this.rename();
 		});
 	}
 
@@ -88,12 +98,14 @@ class FileManager {
 	}
 
 	static selectFile(button, filename, size) {
-		if (window.selected_file) window.selected_file.classList.remove('bg-zinc-600', 'ring-zinc-500', 'ring-2', 'outline-none', 'text-zinc-300');
+		if (window.selected_button) window.selected_button.classList.remove('bg-zinc-600', 'ring-zinc-500', 'ring-2', 'outline-none', 'text-zinc-300');
 
-		window.selected_file = button;
+		window.selected_button = button;
+		window.selected_file = filename;
 		button.classList.add('bg-zinc-600', 'ring-zinc-500', 'ring-2', 'outline-none', 'text-zinc-300');
 		document.getElementById('kebab-file').classList.remove('hidden');
 		document.getElementById('property-file').textContent = filename + ' - ' + size;
+		document.getElementById('input-rename').value = window.selected_file.split('/').at(-1);
 	}
 
 	static clear() {
@@ -109,6 +121,62 @@ class FileManager {
 
 	static toGo(path) {
 		client.send_message({file_manager: { get_files: path }})
+	}
+
+	static openOnPc() {
+		client.send_message({
+			file_manager: {
+				open_on_pc: window.selected_file
+			}
+		});
+	}
+
+	static rename() {
+		const target = document.getElementById('input-rename');
+		let to = window.selected_file.split('/')
+		to.pop()
+		to = `${to.join('/')}/${target.value}`
+
+		client.send_message({
+			file_manager: {
+				rename: {
+					current: window.selected_file,
+					to: to,
+					path: window.current_path
+				}
+			}
+		});
+
+		target.value = '';
+		document.querySelector("#modal-rename").click();
+	}
+
+	static delete() {
+		client.send_message({
+			file_manager: {
+				delete: {
+					file: window.selected_file,
+					path: window.current_path
+				}
+			}
+		});
+	}
+
+	static showClipboard() {
+		window.file_to_move = window.selected_file;
+		document.getElementById('move').classList.remove('hidden');
+	}
+
+	static move() {
+		client.send_message({
+			file_manager: {
+				move: {
+					target: window.file_to_move,
+					destiny: window.current_path
+				}
+			}
+		});
+		document.getElementById('move').classList.add('hidden');
 	}
 
 	static createFile(event) {

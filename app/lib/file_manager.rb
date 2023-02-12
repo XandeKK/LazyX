@@ -1,4 +1,5 @@
 require 'fileutils'
+require 'timeout'
 
 module FileManager
 	def self.handler(faye_client, message)
@@ -85,46 +86,45 @@ module FileManager
 		end
 	end
 
+	def self.open_on_pc(faye, message)
+		system "xdg-open #{message['open_on_pc']} || #{message['open_on_pc']}"
+	end
+
 	def self.move(faye, message)
 		target = message['move']['target']
 		destiny = message['move']['destiny']
+		
 		begin
 			FileUtils.mv(target, destiny)
-			self.publish(faye, {move: :success})
+			files = self.glob(destiny)
+			self.publish(faye, {move: {files: files}})
 		rescue => e
 			self.publish(faye, {move: {error: e}})
 		end
 	end
 
-	def self.delete_file(faye, message)
-		files = message['delete_file']['files']
+	def self.delete(faye, message)
+		file = message['delete']['file']
+		path = message['delete']['path']
 
 		begin
-			FileUtils.rm files
-			self.publish(faye, {delete_file: :success})
+			FileUtils.rm_rf file
+			files = self.glob(path)
+			self.publish(faye, {delete: {files: files}})
 		rescue => e
-			self.publish(faye, {delete_file: {error: e}})
-		end
-	end
-
-	def self.delete_folder(faye, message)
-		folders = message['delete_folder']['folders']
-
-		begin
-			FileUtils.rm_rf folders
-			self.publish(faye, {delete_folder: :success})
-		rescue => e
-			self.publish(faye, {delete_folder: {error: e}})
+			self.publish(faye, {delete: {error: e}})
 		end
 	end
 
 	def self.rename(faye, message)
 		current = message['rename']['current']
 		to = message['rename']['to']
+		path = message['rename']['path']
 
 		begin
 			FileUtils.mv(current, to)
-			self.publish(faye, {rename: :success})
+			files = self.glob(path)
+			self.publish(faye, {rename: {files: files}})
 		rescue => e
 			self.publish(faye, {rename: {error: e}})
 		end

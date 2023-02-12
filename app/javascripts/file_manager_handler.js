@@ -40,18 +40,29 @@ class FileManagerHandler {
 	}
 
 	static move(message) {
-		// todo
+		if(message['error']) {
+			Alert.add(message['error'], 'danger', 3000);
+			return;
+		}
+		Alert.add('success', 'success', 2000);
+		FileManager.addFiles(message['files']);
 	}
 
-	static delete_file(message) {
-		// todo
-	}
-
-	static delete_folder(message) {
-		// todo
+	static delete(message) {
+		if(message['error']) {
+			Alert.add(message['error'], 'danger', 3000);
+			return;
+		}
+		Alert.add('success', 'success', 2000);
+		FileManager.addFiles(message['files']);
 	}
 
 	static rename(message) {
-		// todo
+		if(message['error']) {
+			Alert.add(message['error'], 'danger', 3000);
+			return;
+		}
+		Alert.add('success', 'success', 2000);
+		FileManager.addFiles(message['files']);
 	}
 }
