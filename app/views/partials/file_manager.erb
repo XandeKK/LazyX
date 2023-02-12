@@ -4,6 +4,48 @@
 	    
 	  </ol>
 	</nav>
-	<ul id="files" class="py-2 w-full h-80 grid grid-cols-4 gap-3 text-center text-sm overflow-auto border-b border-zinc-600">
+	<ul id="files" class="py-2 w-full h-96 grid grid-cols-4 gap-3 text-center text-sm overflow-auto border-b border-zinc-600">
 	</ul>
+	<nav class="flex justify-between h-7 p-1 mb-3 bg-zinc-600">
+		<div>
+			<button class="focus:text-zinc-300 hover:bg-zinc-700 focus:bg-zinc-600 focus:outline-none focus:ring-2 focus:ring-zinc-500">
+				<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+				  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+				</svg>
+			</button>
+
+		</div>
+		<div class="flex gap-3 px-3">
+			<button class="focus:text-zinc-300 hover:bg-zinc-700 focus:bg-zinc-600 focus:outline-none focus:ring-2 focus:ring-zinc-500" data-modal-target="modal-file" data-modal-toggle="modal-file">
+				<svg class="w-5 h-5 mx-auto" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M16 2l5 5v14.008a.993.993 0 0 1-.993.992H3.993A1 1 0 0 1 3 21.008V2.992C3 2.444 3.445 2 3.993 2H16zm-5 9H8v2h3v3h2v-3h3v-2h-3V8h-2v3z"/></svg>
+			</button>
+			<button class="focus:text-zinc-300 hover:bg-zinc-700 focus:bg-zinc-600 focus:outline-none focus:ring-2 focus:ring-zinc-500" data-modal-target="modal-folder" data-modal-toggle="modal-folder">
+				<svg class="w-5 h-5 mx-auto" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12.414 5H21a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h7.414l2 2zM11 12H8v2h3v3h2v-3h3v-2h-3V9h-2v3z"/></svg>
+			</button>
+		</div>
+	</nav>
+</div>
+
+<div id="modal-file" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto h-modal">
+  <div class="relative w-full max-w-2xl">
+    <div class="relative rounded-lg shadow bg-zinc-700 p-3">
+    	<div class="mb-6">
+		    <label for="input-file" class="block mb-2 text-sm font-medium text-white">Filename: </label>
+		    <input type="text" id="input-file" class="bg-zinc-600 border text-sm rounded-lg block w-full p-2.5 border-zinc-600 dark:placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
+		  </div>
+      	<button id="add-file" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+    </div>
+  </div>
+</div>
+
+<div id="modal-folder" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto h-modal">
+  <div class="relative w-full max-w-2xl">
+    <div class="relative rounded-lg shadow bg-zinc-700 p-3">
+    	<div class="mb-6">
+		    <label for="input-folder" class="block mb-2 text-sm font-medium text-white">Folder name: </label>
+		    <input type="text" id="input-folder" class="bg-zinc-600 border text-sm rounded-lg block w-full p-2.5 border-zinc-600 dark:placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
+		  </div>
+      	<button id="add-folder" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+    </div>
+  </div>
 </div>

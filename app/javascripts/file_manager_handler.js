@@ -1,5 +1,6 @@
 class FileManagerHandler {
 	static initialize() {
+		FileManager.initializeEvent();
 		client.send_message({file_manager: { home: '' }})
 	}
 
@@ -21,11 +22,13 @@ class FileManagerHandler {
 	}
 
 	static create_file(message) {
-		// todo
+		if(message['error']) return;
+		FileManager.addFiles(message['files']);
 	}
 
 	static create_folder(message) {
-		// todo
+		if(message['error']) return;
+		FileManager.addFiles(message['files']);
 	}
 
 	static move(message) {

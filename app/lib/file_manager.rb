@@ -54,14 +54,15 @@ module FileManager
 		file = message['create_file']['file']
 
 		if File.exist? "#{path}/#{file}"
-			self.publish(faye, {create_file: :exist})
+			self.publish(faye, {create_file: {error: 'file exists'}})
 			return
 		end
 
 		begin
 			file = File.new "#{path}/#{file}", 'w'
 			file.close
-			self.publish(faye, {create_file: :success})
+			files = self.glob(path)
+			self.publish(faye, {create_file: {files: files}})
 		rescue => e
 			self.publish(faye, {create_file: {error: e}})
 		end
@@ -71,8 +72,9 @@ module FileManager
 		path = message['create_folder']['path']
 		file = message['create_folder']['file']
 		begin
-			files = Dir.mkdir "#{path}/#{file}"
-			self.publish(faye, {create_folder: :success})
+			Dir.mkdir "#{path}/#{file}"
+			files = self.glob(path)
+			self.publish(faye, {create_folder: {files: files}})
 		rescue Errno::EEXIST => e
 			self.publish(faye, {create_folder: {error: e}})
 		end
