@@ -39,7 +39,6 @@ class App < Sinatra::Base
   get '/file' do
     attachment params[:file].split('/').last
     file = File.open(params[:file])
-    # headers "Content-Length" => file.size
     stream do |out|
       file.each_line do |chunk|
         out << chunk

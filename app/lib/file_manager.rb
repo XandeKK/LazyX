@@ -18,7 +18,6 @@ module FileManager
 				path: path,
 				image: file.match?(/\.(jpg|jpeg|png|gif)$/),
 				video: file.match?(/\.(mkv|mp4|avi)$/),
-				executable: File.executable?(file),
 				compressed: file.match?(/\.(zip|rar|tar)$/)
 			}
 
