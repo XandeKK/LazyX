@@ -35,4 +35,15 @@ class App < Sinatra::Base
 	get '/' do
 		erb :'home/index', :layout => :application
 	end
+
+  get '/file' do
+    attachment params[:file].split('/').last
+    file = File.open(params[:file])
+    # headers "Content-Length" => file.size
+    stream do |out|
+      file.each_line do |chunk|
+        out << chunk
+      end
+    end
+  end
 end

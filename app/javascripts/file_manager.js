@@ -21,10 +21,10 @@ class FileManager {
 			 button.addEventListener('dblclick', this.toGo.bind(this, file['name']));
  			} else if (file['image']) {
  				button.innerHTML = '<svg class="w-12 h-12 mx-auto" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 11.1l2-2 5.5 5.5 3.5-3.5 3 3V5H5v6.1zM4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm11.5 7a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg>';
- 				button.addEventListener('dblclick', this.openImage.bind(this, file['name']));
+ 				button.addEventListener('dblclick', this.downloadFile.bind(this, file['name']));
  			} else if (file['video']) {
  				button.innerHTML = '<svg class="w-12 h-12 mx-auto" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M2 3.993A1 1 0 0 1 2.992 3h18.016c.548 0 .992.445.992.993v16.014a1 1 0 0 1-.992.993H2.992A.993.993 0 0 1 2 20.007V3.993zm8.622 4.422a.4.4 0 0 0-.622.332v6.506a.4.4 0 0 0 .622.332l4.879-3.252a.4.4 0 0 0 0-.666l-4.88-3.252z"/></svg>';
- 				button.addEventListener('dblclick', this.openVideo.bind(this, file['name']));
+ 				button.addEventListener('dblclick', this.downloadFile.bind(this, file['name']));
  			} else if (file['compressed']) {
  				button.innerHTML = '<svg class="w-12 h-12 mx-auto" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M21 5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h7.414l2 2H16v2h2V5h3zm-3 8h-2v2h-2v3h4v-5zm-2-2h-2v2h2v-2zm2-2h-2v2h2V9zm-2-2h-2v2h2V7z"/></svg>';
  			} else if (file['executable']) {
@@ -66,12 +66,8 @@ class FileManager {
 		}
 	}
 
-	static openImage(name) {
-		console.log('openImage', name);
-	}
-
-	static openVideo(name) {
-		console.log('openVideo', name);
+	static downloadFile(name) {
+		window.open(`/file?file=${name}`, '_blank');
 	}
 
 	static openExecutable(name) {
