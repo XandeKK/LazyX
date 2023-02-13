@@ -25,6 +25,9 @@
 			<button class="focus:text-zinc-300 hover:bg-zinc-700 focus:bg-zinc-600 focus:outline-none focus:ring-2 focus:ring-zinc-500" data-modal-target="modal-folder" data-modal-toggle="modal-folder">
 				<svg class="w-5 h-5 mx-auto" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12.414 5H21a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h7.414l2 2zM11 12H8v2h3v3h2v-3h3v-2h-3V9h-2v3z"/></svg>
 			</button>
+			<button class="focus:text-zinc-300 hover:bg-zinc-700 focus:bg-zinc-600 focus:outline-none focus:ring-2 focus:ring-zinc-500" data-modal-target="modal-upload" data-modal-toggle="modal-upload">
+				<svg class="w-5 h-5 mx-auto" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M4 19h16v-7h2v8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-8h2v7zM14 9v6h-4V9H5l7-7 7 7h-5z"/></svg>
+			</button>
 		</div>
 	</nav>
 </div>
@@ -37,7 +40,7 @@
 		    <label for="input-file" class="block mb-2 text-sm font-medium text-white">Filename: </label>
 		    <input type="text" id="input-file" class="bg-zinc-600 border text-sm rounded-lg block w-full p-2.5 border-zinc-600 dark:placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
 		  </div>
-      	<button id="add-file" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+      	<button id="add-file" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Create a file</button>
     </div>
   </div>
 </div>
@@ -50,7 +53,23 @@
 		    <label for="input-folder" class="block mb-2 text-sm font-medium text-white">Folder name: </label>
 		    <input type="text" id="input-folder" class="bg-zinc-600 border text-sm rounded-lg block w-full p-2.5 border-zinc-600 dark:placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
 		  </div>
-      	<button id="add-folder" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+      	<button id="add-folder" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Create a folder</button>
+    </div>
+  </div>
+</div>
+
+<div id="modal-upload" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto h-modal">
+  <div class="relative w-full max-w-2xl">
+    <div class="relative rounded-lg shadow bg-zinc-700 p-3">
+    	<div class="mb-6">
+		    <div>
+		    	<div class="mb-3">
+						<label class="block mb-2 text-sm font-medium text-white" for="file-upload">Upload file</label>
+						<input class="block w-full text-sm border rounded-lg cursor-pointer text-gray-400 focus:outline-none bg-zinc-600 border-zinc-600 placeholder-zinc-400" id="file-upload" type="file" name="file" multiple>
+		    	</div>
+			    <button id="upload" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Upload</button>
+		    </div>
+		  </div>
     </div>
   </div>
 </div>
@@ -63,7 +82,7 @@
 		    <label for="input-rename" class="block mb-2 text-sm font-medium text-white">rename: </label>
 		    <input type="text" id="input-rename" class="bg-zinc-600 border text-sm rounded-lg block w-full p-2.5 border-zinc-600 dark:placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
 		  </div>
-      	<button id="rename" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+      	<button id="rename" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Rename</button>
     </div>
   </div>
 </div>

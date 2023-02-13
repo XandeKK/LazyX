@@ -45,4 +45,14 @@ class App < Sinatra::Base
       end
     end
   end
+
+  post '/upload' do
+    tempfile = params[:file][:tempfile] 
+    filename = params[:file][:filename] 
+    path = params[:path]
+    if File.exist?("#{path}/#{filename}")
+      filename.insert(0, SecureRandom.uuid)
+    end
+    FileUtils.mv(tempfile.path, "#{path}/#{filename}")
+  end
 end

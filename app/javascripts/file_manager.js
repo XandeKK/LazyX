@@ -8,6 +8,7 @@ class FileManager {
 		document.getElementById('move').addEventListener('click', this.move);
 		document.getElementById('add-file').addEventListener('click', this.createFile);
 		document.getElementById('add-folder').addEventListener('click', this.createFolder);
+		document.getElementById('upload').addEventListener('click', this.upload.bind(this));
 
 		document.getElementById('input-file').addEventListener('keypress', (event)=> {
 			if (event.key === "Enter") {
@@ -160,6 +161,7 @@ class FileManager {
 				}
 			}
 		});
+		document.querySelector("#file-manager").click();
 	}
 
 	static showClipboard() {
@@ -177,6 +179,26 @@ class FileManager {
 			}
 		});
 		document.getElementById('move').classList.add('hidden');
+	}
+
+	static async upload() {
+		const files = document.getElementById('file-upload').files;
+
+		for (var i = 0; i < files.length; i++) {
+			const formData = new FormData(); 
+  		formData.append("file", files[i]);
+  		formData.append("path", window.current_path);
+
+			await fetch('/upload', {
+		    method: "POST", 
+		    body: formData
+		  }); 
+  		Alert.add(`The ${files[i].name} has been uploaded.`, 'success', 2000);
+  		this.toGo(window.current_path);
+  		document.querySelector("#modal-upload").click();
+		}
+		document.getElementById('file-upload').value = '';
+		document.querySelector("#modal-upload").click();
 	}
 
 	static createFile(event) {
